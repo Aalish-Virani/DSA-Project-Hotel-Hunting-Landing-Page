@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style-custom.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header class="bg-white my-6 mx-auto">
+
+        <nav class="flex justify-evenly px-12">
+            <div class="flex justify-between px-3 items-center border rounded-full shadow-md h-12 w-52">
+                <button><i class="fa-solid fa-hotel p-2"></i></button>
+                <button class="pr-2"><b>HOTEL BOOKING</b></button>
+            </div>
+
+            <div class="flex justify-between px-4 items-center border rounded-full shadow-md h-12">
+                <button class="w-96 mx-12">Hotel Search</button>
+                <button><i class="fa-solid fa-magnifying-glass bg-red-500 text-white rounded-full p-2"></i></button>
+            </div>
+
+            <div onclick="filterVisibility()" id="filter" class="flex justify-between px-3 items-center border rounded-full shadow-md h-12 w-28">
+                <button><i class="fa-solid fa-filter bg-red-500 text-white rounded-full p-2"></i></button>
+                <button class="p-2">Filter</button>
+            </div>
+        </nav>
+
+        <div id="filter-visibility" class="hidden">
+
+            <div id="filter" class="container filter | flex h-96  my-4 ">
+
+                <div class="flex flex-col justify-center gap-8 w-64 bg-white rounded-3xl border-2">
+
+                    <div class="mx-auto">
+                        <i class="fa-solid fa-arrow-down-up-across-line text-red-500 rounded-full p-2"></i>
+                        <b>Sort By</b>
+                    </div>
+
+                    <div class="mx-auto rounded-full p-2 ">
+                        <input type="radio"  name="sorting" id="rating-sort" aria-selected="false">
+                        <label for="rating">Rating</label><br>
+                    </div>
+                    <div class="mx-auto rounded-full p-2">
+                        <input type="radio" name="sorting" id="price-sort" aria-selected="false">
+                        <label for="price">Price</label><br>
+                    </div>
+                    <div class="mx-auto rounded-full p-2">
+                        <input type="radio" name="sorting" id="distance-sort" aria-selected="false">
+                        <label for="distance">Distance</label><br>
+                    </div>
+
+                    <button onclick="hotelSorting()"
+                        class="bg-red-500 text-white rounded-full shadow-md px-8 p-2 mx-auto">Sort</button>
+
+                </div>
+
+                <div class="mx-auto my-10">
+
+                    <div class="flex justify-center gap-6 h-20 my-4 bg-white rounded-3xl ">
+
+                        <div class="w-40">
+                            <b>Facilities</b>
+                        </div>
+
+                        <div class="w-28 rounded-full p-2">
+                            <input type="checkbox" name="Parking" id="1" >
+                            <label for="facilities">Parking</label><br>
+                        </div>
+                        <div class="w-28 rounded-full p-2">
+                            <input type="checkbox" name="Free Wifi" id="2">
+                            <label for="facilities">Free Wifi</label><br>
+                        </div>
+                        <div class="w-28 rounded-full p-2">
+                            <input type="checkbox" name="Restaurant" id="3">
+                            <label for="facilities">Restaurant</label><br>
+                        </div>
+                        <div class="w-28 rounded-full p-2">
+                            <input type="checkbox" name="Smoking Room" id="4">
+                            <label for="facilities">Smoking Room</label><br>
+                        </div>
+                        <div class="w-28 rounded-full p-2">
+                            <input type="checkbox" name="Airport Shuttle" id="5">
+                            <label for="facilities">Airport Shuttle</label><br>
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex  justify-center gap-6 h-20 my-4 bg-white rounded-3xl ">
+
+                        <div class="w-40">
+                            <b>Fun Things to do</b>
+                        </div>
+
+                        <div class="w-28  rounded-full p-2">
+                            <input type="checkbox" name="Fitness Centre" id="6">
+                            <label for="fun">Fitness Centre</label><br>
+                        </div>
+                        <div class="w-28  rounded-full p-2">
+                            <input type="checkbox" name="Evening Entertainment" id="7">
+                            <label for="fun">Evening Entertainment</label><br>
+                        </div>
+                        <div class="w-28  rounded-full p-2">
+                            <input type="checkbox" name="Spa and Wellness Centre" id="8">
+                            <label for="fun">Spa and Wellness Centre</label><br>
+                        </div>
+                        <div class="w-28  rounded-full p-2">
+                            <input type="checkbox" name="Indoor Pool" id="9">
+                            <label for="fun">Indoor Pool</label><br>
+                        </div>
+                        <div class="w-28  rounded-full p-2">
+                            <input type="checkbox" name="Golf Course" id="10">
+                            <label for="fun">Golf Course</label><br>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end gap-40 h-20 mx-20 my-4 bg-white rounded-3xl ">
+
+                        <button onclick="filterResult()" class="bg-red-500 text-white border font-bold rounded-full shadow-md h-12 px-8 my-6">Apply
+                            Filter</button>
+
+                        <button onclick="clearFilter()" class="bg-white font-medium border rounded-full shadow-md h-12 px-8 my-6">Clear
+                            All</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <main class="container |  px-4 " id="hotel-cards">
+
+        <!-- <div class="flex flex-row h-64 m-4">
+
+            <img class="w-72 rounded-xl"
+                src="https://a0.muscache.com/im/pictures/miso/Hosting-791091294541743329/original/72e6e374-1305-41e5-a901-774df9a12ef9.jpeg?im_w=720"
+                alt="image">
+
+                <div class="flex flex-col justify-between w-96 m-4 mx-20">
+
+                <p class="text-lg font-bold">Hotel Name</p>
+                <p class="text-sm font-medium">Location</p>
+                <p class="text-sm font-medium">city</p>
+
+                <div class="h-16">
+
+                </div>
+
+            </div>
+
+            <div class="flex flex-col justify-between w-72 m-4 ">
+
+                <div class="mx-auto">
+                    <i class="fa-solid fa-star"></i>
+                    <p class="text-sm font-semibold inline">5.0</p>
+                </div>
+
+                <div class=" bg-red-500 text-white rounded-full p-3 px-4 mx-auto">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <p class="text-sm font-bold inline">5000 pkr</p>
+                </div>
+
+                <div class="mx-auto">
+
+                    <p class="text-sm font-semibold ">5 km</p>
+                </div>
+
+
+                <div class="h-16 mt-2">
+
+                </div>
+
+            </div>
+
+        </div> -->
+
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
