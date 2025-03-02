@@ -12,4 +12,4 @@ Selection Sort
 Insertion Sort
 
 🔗 Live Demo
-Click Here to Visit (https://aalish-virani.github.io/DSA-project/)
+Click Here to Visit (https://aalish-virani.github.io/DSA-Project-Hotel-Hunting-Landing-Page/)
